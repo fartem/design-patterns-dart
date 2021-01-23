@@ -1,0 +1,5 @@
+name: patterns_dart
+description: Some patterns on Dart
+
+dependencies:
+  test: ^1.6.0
