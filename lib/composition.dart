@@ -9,14 +9,15 @@ abstract class Dependency {
 }
 
 class GitDependency extends Dependency {
+  final String _url;
   final String _user;
   final String _password;
 
-  GitDependency(this._user, this._password);
+  GitDependency(this._url, this._user, this._password);
 
   @override
   void loadToProject(Project project) {
-    print('Dependency loaded from Git with credentials: $_user:$_password');
+    print('Dependency loaded from Git from $_url as $_user');
     project.insertFiles([]);
   }
 }
