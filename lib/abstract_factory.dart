@@ -22,17 +22,41 @@ class UnknownOSInfo extends OSInfo {
   String osName() => 'Unknown';
 }
 
-class FactoryProducer {
-  static OSInfo osInfo(Map<String, String> env) {
+abstract class OSInfoFactory {
+  OSInfo osInfo();
+}
+
+class LinuxOSInfoFactory extends OSInfoFactory {
+  @override
+  OSInfo osInfo() => LinuxOSInfo();
+}
+
+class MacOSInfoFactory extends OSInfoFactory {
+  @override
+  OSInfo osInfo() => MacOSInfo();
+}
+
+class WindowsOSInfoFactory extends OSInfoFactory {
+  @override
+  OSInfo osInfo() => WindowsOSInfo();
+}
+
+class UnknownOSInfoFactory extends OSInfoFactory {
+  @override
+  OSInfo osInfo() => UnknownOSInfo();
+}
+
+class OSInfoFactoryProducer {
+  static OSInfoFactory osInfo(Map<String, String> env) {
     final osName = env['os'];
     switch (osName) {
       case 'linux':
-        return LinuxOSInfo();
+        return LinuxOSInfoFactory();
       case 'mac':
-        return MacOSInfo();
+        return MacOSInfoFactory();
       case 'windows':
-        return WindowsOSInfo();
+        return WindowsOSInfoFactory();
     }
-    return UnknownOSInfo();
+    return UnknownOSInfoFactory();
   }
 }
